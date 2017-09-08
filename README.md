@@ -148,3 +148,22 @@ $ ls
 The output should look similar to this. We've requested our Git version (`git --version`), then created a folder for our workshop outputs (`mkdir workshop-test`), changed (`cd workshop-test`) into that folder, cloned the Git Repository from GitHub for this workshop (`git clone ...`), then listed our files to show the presence of that clone Git repository (`ls`):
 
 ![Bash output of test python virtualenv creation](images/GitTest.png)
+
+### OpenRefine (Recommended)
+OpenRefine is a graphical-interface tool for cleaning, transforming, and enriching imported metadata. OpenRefine is not required, but we strongly recommend it will be demoed in-depth as section five of the workshop.
+
+The latest stable release of OpenRefine is version 2.7; an earlier iteration (version 2.5) of the tool, known as Google Refine, still works, but the workshop will make use of version 2.7.
+
+Platform | Installation Instructions | Link to Installation Help
+---------|---------------------------|--------------------------
+Windows  | Download the ZIP package, unzip, and double-click `openrefine.exe` to start. | https://github.com/OpenRefine/OpenRefine/releases/download/2.7/openrefine-win-2.7.zip
+Mac OS X | Download the DMG package, open, drag the application icon into the Applications folder, and double click it to start. | https://github.com/OpenRefine/OpenRefine/releases/download/2.7/openrefine-mac-2.7.dmg
+Linux    | Download the TAR package, extract it, and run `./refine` to start. | https://github.com/OpenRefine/OpenRefine/releases/download/2.7/openrefine-linux-2.7.tar.gz
+
+#### OpenRefine Install Test
+
+OpenRefine requires a working Java runtime environment, otherwise the program will not start.
+
+Upon launch, OpenRefine will run as a local server, opening your computer's browser. As long as OpenRefine is running, you can point your browser at http://127.0.0.1:3333/ to use it, even in several browser tabs/windows.
+
+![OpenRefine User Start Window](images/openrefine.png)
