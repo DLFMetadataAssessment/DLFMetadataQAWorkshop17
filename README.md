@@ -13,25 +13,27 @@ Welcome to the open repository, documentation and materials for the DPLAfest 201
 
 ## About the Workshop
 
-The DPLAfest 2017 DPLA Metadata Analysis Bootcamp for Hubs & Partners will be held **1 PM to 5 PM, Wednesday, April 19, 2017 at the Chicago Public Library’s Harold Washington Library Center** (enter at 401 S. Plymouth Street and read more about space logistics [here](https://dp.la/info/get-involved/dplafest/april-2017/travel/)). We will meet for the workshop in the Reception Room. The workshop will be followed by a small reception for Hub members in the South Hall.
+This full-day metadata analysis workshop will introduce library, archive, and museum metadata practitioners and technologists with the basic skills and knowledge needed to assess metadata quality using data analysis tools. Workshop participants will be introduced to the Metadata Assessment Framework developed by the DLF Assessment Interest Group, Metadata Working Group. Using this framework as a guideline, participants will be taught the basics of using several tools to harvest, analyze, and remediate metadata, both for a local and aggregated context. The workshop will close by helping participants strategize ways to bring these tools back into their daily workflows and continue to train others they work with to do the same.
 
-This workshop is a registration-only event for DPLA Hubs & Partners. For registration information or other logistical questions before the event, please email Gretchen Gueguen, DPLA Data Services Coordinator and workshop organizer: [gretchen (at) dp (dot) la](mailto:gretchen@dp.la).
+The workshop will be held **9 AM to 5 PM, Thursday, October 26, 2017 at the Westin Convention Center** and is a registration-only event. For registration information or other logistical questions before the event, please email Gretchen Gueguen, DPLA Data Services Coordinator and workshop organizer: [gretchen (at) dp (dot) la](mailto:gretchen@dp.la).
 
 We ask that all participants come to the workshop ready to dive in by reviewing the information in this document. If you want a sneak peak of the workshop's contents, feel free to also watch this repository (you'll be notified of updates). To watch this repository, sign into GitHub, go this repository's home URL, and click the following button:
 
 ![Image of Watching a GitHub Repository Button Dropdown](images/WatchingGHRepo.png)
 
-## Workshop Schedule
+## Draft Workshop Schedule
 
 Time | Lesson | Leader | Lesson Materials
 -----|--------|--------|-----------------
-**1-1:15 PM** | Intros & Welcome, Housekeeping, etc. (15 minutes)| [Gretchen](mailto:gretchen@dp.la) | n/a
-**1:15-1:45 PM** | DPLA MAP 4.0 and the basic requirements/crosswalk & mapping goals (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | [http://bit.ly/dpla-metadata-bootcamp](http://bit.ly/dpla-metadata-bootcamp)
-**1:45-2:15 PM** | Command line basics (30 minutes) | [Audrey](mailto:audrey@dp.la) | [Bash_Exercises.md](Bash_Exercises.md)
-**2:15-2:45 PM** | Harvesting OAI feed at the command line (30 minutes) | Christina | [Metadata_Harvest.md](Metadata_Harvest.md)
-**2:45-3 PM** | break (15 minutes) | n/a | n/a
-**3-4:30 PM** | Metadata analysis (90 minutes, including working time) | Christina | [Metadata_Breakers.md](Metadata_Breakers.md)
-**4:30-5 PM** | Other DPLA metadata analysis tools to explore (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | [http://bit.ly/dpla-metadata-bootcamp](http://bit.ly/dpla-metadata-bootcamp)
+**9-10 AM** | Intros & Welcome, Metadata Basics & MWG framework (60 minutes) | Kate & Hannah | n/a
+**10-10:15 AM** | break (15 minutes) | n/a | n/a
+**10:15-10:45 AM** | Specific Example of DPLA Aggregation (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | [http://bit.ly/dpla-metadata-bootcamp](http://bit.ly/dpla-metadata-bootcamp)
+**10:45-11:30 AM** | Basic Command Line & Data Harvesting Tools (30 minutes) | Laura | [Bash_Exercises.md](Bash_Exercises.md), [Metadata_Harvest.md](Metadata_Harvest.md)
+**11:30 AM-1 PM** | break (90 minutes) | n/a | n/a
+**1-2:30 PM** | Command Line Metadata analysis (90 minutes) | Christina | [Metadata_Breakers.md](Metadata_Breakers.md)
+**2:30-2:45 PM** | break (15 minutes) | n/a | n/a
+**2:45-4:15 PM** | OpenRefine (90 minutes) | Scotty | n/a
+**4:15-4:45 PM** | Reuse this training (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | n/a
 
 ## Contact Before, During, After the Workshop
 
