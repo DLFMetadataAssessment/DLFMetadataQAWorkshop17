@@ -25,7 +25,7 @@ We ask that all participants come to the workshop ready to dive in by reviewing 
 
 Time | Lesson | Leader | Lesson Materials
 -----|--------|--------|-----------------
-**9-10 AM** | Intros & Welcome, Metadata Basics & MWG framework (60 minutes) | Kate & Hannah | n/a
+**9-10 AM** | Intros & Welcome, Metadata Basics & MWG framework (60 minutes) | Kate & Hannah | [Slides](/slides/Intro_Basics_and_Framework.pdf)
 **10-10:15 AM** | break (15 minutes) | n/a | n/a
 **10:15-10:45 AM** | Specific Example of DPLA Aggregation (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | [http://bit.ly/dpla-metadata-bootcamp](http://bit.ly/dpla-metadata-bootcamp)
 **10:45-11:30 AM** | Basic Command Line & Data Harvesting Tools (30 minutes) | Laura | [Bash_Exercises.md](Bash_Exercises.md), [Metadata_Harvest.md](Metadata_Harvest.md)
