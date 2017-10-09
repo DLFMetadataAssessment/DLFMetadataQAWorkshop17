@@ -1,4 +1,4 @@
-# DPLAFest 2017 DPLA Metadata Analysis Workshop
+# DLF Metadata QA Workshop 2017
 
 Welcome to the open repository, documentation and materials for the DPLAfest 2017 DPLA Metadata Analysis Workshop.
 
@@ -28,7 +28,7 @@ Time | Lesson | Leader | Lesson Materials
 **9-10 AM** | Intros & Welcome, Metadata Basics & MWG framework (60 minutes) | Kate & Hannah | [Slides](/slides/Intro_Basics_and_Framework.pdf)
 **10-10:15 AM** | break (15 minutes) | n/a | n/a
 **10:15-10:45 AM** | Specific Example of DPLA Aggregation (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | [http://bit.ly/dpla-metadata-bootcamp](http://bit.ly/dpla-metadata-bootcamp)
-**10:45-11:30 AM** | Basic Command Line & Data Harvesting Tools (30 minutes) | Laura | [Bash_Exercises.md](Bash_Exercises.md), [Metadata_Harvest.md](Metadata_Harvest.md)
+**10:45-11:30 AM** | Basic Command Line & Data Harvesting Tools (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | [Bash.md](Bash.md), [Metadata_Harvest.md](Metadata_Harvest.md)
 **11:30 AM-1 PM** | break (90 minutes) | n/a | n/a
 **1-2:30 PM** | Command Line Metadata analysis (90 minutes) | Christina | [Metadata_Breakers.md](Metadata_Breakers.md)
 **2:30-2:45 PM** | break (15 minutes) | n/a | n/a
@@ -47,7 +47,7 @@ During the workshop, we will indicate the best ways to get help or communicate a
 
 ## Our Expectations of You
 
-To keep this workshop a safe and inclusive space, we ask that you review and follow the [DPLAfest 2017 Code of Conduct](https://dp.la/info/get-involved/dplafest/april-2017/dplafest-2017-code-of-conduct/) and [the Recurse Center Social Rules (aka Hacker School Rules)](https://www.recurse.com/manual#sub-sec-social-rules).
+To keep this workshop a safe and inclusive space, we ask that you review and follow the [the Recurse Center Social Rules (aka Hacker School Rules)](https://www.recurse.com/manual#sub-sec-social-rules).
 
 ## Participant Requirements
 
