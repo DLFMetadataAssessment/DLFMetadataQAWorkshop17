@@ -1,14 +1,11 @@
-# Command Line Basics, DPLAFest 2017 DPLA Metadata Analysis Workshop
+# Command Line Basics, DLF Metadata QA Workshop 2017
 
-*1:45-2:15 PM, led by [Audrey Altman, DPLA Developer](mailto:audrey@dp.la)*
+*10:45-11:30 AM, led by [Gretchen Gueguen, DPLA Data Services Coordinator](mailto:gretchen@dp.la)*
 
 ## Goals
 
 - \*nix Shell & Bash Introduction
 - Navigating & Working with Files & Directories
-- Pipes & Filters
-- Finding Things
-- Redirect Input & Output
 
 ## Preparation
 
@@ -34,17 +31,7 @@ Nota bene: (Not All of this will be Covered; Treat this as a Reference)
     * [mkdir, mkdir -p](#mkdir-mkdir--p)
     * [rmdir, rmdir -p, rm, rm -rf](#rmdir-rmdir--p-rm-rm--rf)
     * [cp, cp -r, mv](#cp-cp--r-mv)
-* [Finding & Opening Things](#finding--opening-things)
-    * [find, find -name -type, find -iname, find -not](#find-find--name--type-find--iname-find--not)
-    * [nano, vi, open](#nano-vi-open)
-    * [grep, grep -c, grep -o, grep -i, grep -oP, grep -v](#grep-grep--c-grep--o-grep--i-grep--op-grep--v)
-* [Other Commands](#other-commands)
-    * [wc, wc -l, wc -w, wc -m](#wc-wc--l-wc--w-wc--m)
-    * [sort, sort -f, sort -n, sort -r, sort -c](#sort-sort--f-sort--n-sort--r-sort--c)
-    * [uniq, uniq -c, uniq -u, uniq -d](#uniq-uniq--c-uniq--u-uniq--d)
-* [Pipelines & pipes](#pipelines--pipes)
-* [Handling input and output from files (i.e. <, >, >>)](#handling-input-and-output-from-files-ie---)
-* [Further Resources](#further-resources)
+
 
 ### Preparation
 
