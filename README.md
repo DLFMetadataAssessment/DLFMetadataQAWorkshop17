@@ -27,13 +27,13 @@ Time | Lesson | Leader | Lesson Materials
 -----|--------|--------|-----------------
 **9-10 AM** | Intros & Welcome, Metadata Basics & MWG framework (60 minutes) | Kate & Hannah | [Slides](/slides/Intro_Basics_and_Framework.pdf)
 **10-10:15 AM** | break (15 minutes) | n/a | n/a
-**10:15-10:45 AM** | Specific Example of DPLA Aggregation (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | [http://bit.ly/dpla-metadata-bootcamp](http://bit.ly/dpla-metadata-bootcamp)
+**10:15-10:45 AM** | Specific Example of DPLA Aggregation (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | [Slides](https://docs.google.com/presentation/d/1RLl0DnzHyjgQjlEDsvgGPZkI2OUYQUXxPoZEGb6f7zg/edit?usp=sharing)
 **10:45-11:30 AM** | Basic Command Line & Data Harvesting Tools (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | [Bash.md](Bash.md), [Metadata_Harvest.md](Metadata_Harvest.md)
 **11:30 AM-1 PM** | break (90 minutes) | n/a | n/a
 **1-2:30 PM** | Command Line Metadata analysis (90 minutes) | Christina | [Metadata_Breakers.md](Metadata_Breakers.md)
 **2:30-2:45 PM** | break (15 minutes) | n/a | n/a
 **2:45-4:15 PM** | OpenRefine (90 minutes) | Scotty | n/a
-**4:15-4:45 PM** | Reuse this training (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | n/a
+**4:15-4:45 PM** | Reuse this training (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | [Slides](https://docs.google.com/presentation/d/1RLl0DnzHyjgQjlEDsvgGPZkI2OUYQUXxPoZEGb6f7zg/edit?usp=sharing)
 
 ## Contact Before, During, After the Workshop
 
