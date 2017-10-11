@@ -1,6 +1,6 @@
-# Metadata Harvests, DPLAFest 2017 DPLA Metadata Analysis Workshop
+# Metadata Harvests, DLF Metadata QA Workshop 2017
 
-*3-4:30 PM PM, led by [Christina Harlow, DataOps at Stanford University Libraries](mailto:cmharlow@gmail.com)*
+*1-2:30 PM PM, led by [Christina Harlow, DataOps at Stanford University Libraries](mailto:cmharlow@gmail.com)*
 
 ## Goals
 
