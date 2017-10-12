@@ -152,8 +152,8 @@ The output should look similar to this. We've requested our Git version (`git --
 
 ![Bash output of test python virtualenv creation](images/GitTest.png)
 
-### OpenRefine (Recommended)
-OpenRefine is a graphical-interface tool for cleaning, transforming, and enriching imported metadata. OpenRefine is not required, but we strongly recommend it, as it will be demoed in-depth as section five of the workshop.
+### OpenRefine (Required)
+OpenRefine is a graphical-interface tool for cleaning, transforming, and enriching imported metadata. OpenRefine is strongly recommended, as it will be discussed and utilized in-depth as section five of the workshop.
 
 The latest stable release of OpenRefine is version 2.7; an earlier iteration (version 2.5) of the tool, known as Google Refine, still works, but the workshop will use version 2.7.
 
