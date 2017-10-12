@@ -2,6 +2,8 @@
 
 *2:45 - 4:15 PM, led by [Scotty Carlson, Metadata Coordinator @ Fondren Library, Rice University](mailto:sjc5@rice.edu)*
 
+## Note: this outline is still under construction. Please check back closer to the workshop for a final version.
+
 ## Goals
 * Introduce the OpenRefine Interface
 * Basic Data Interactions
@@ -242,6 +244,24 @@ The Wikidata reconciler needs a specific Data Type to match with; in many cases,
 
 Christina Harlow's [Library of Congress reconciler](https://github.com/cmh2166/lc-reconcile) is also a fab resource worth mentioning!
 
+## Extended Features
+
+### Cross, OpenRefine's VLOOKUP Function
+
+Coming soon.
+
+### Enriching with External Data Sources & APIs
+
+Coming soon.
+
+### Extending OpenRefine with Python/Jython Libraries
+
+Coming soon.
+
+### Extensions
+
+Coming soon.
+
 ## Getting Your Data Out of OpenRefine
 
 When your data has been cleaned to your satisfaction, you can export it to a variety of different file formats. Be sure all text filters and facet windows are closed, and that you have joined any split multi-valued data before you export! Clicking on the **Export** button in the upper right corner of the screen will display the export file formats available.
@@ -255,19 +275,3 @@ Refine's Templating function allows you to export your data in a "roll your own"
 * [MODS](https://gist.github.com/sallain/7604ffb0c155294fcfaf)
 * [XML](http://blogs.bl.uk/digital-scholarship/2015/12/using-open-refine-to-create-xml-records-for-wikimedia-batch-upload-tool.html)
 * [YAML](https://github.com/OpenRefine/OpenRefine/wiki/Export-As-YAML)
-
-## Extra Credit
-
-### Cross, OpenRefine's VLOOKUP Function
-
-### Enriching with External Data Sources & APIs
-
-#### Example: Geocoding with Google Maps
-
-### Extending OpenRefine with Python/Jython Libraries
-
-#### Example: Unidecode
-
-### Extensions
-
-#### Example: RDF Refine, an Extension for Handling RDF
