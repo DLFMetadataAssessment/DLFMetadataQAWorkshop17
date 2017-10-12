@@ -33,7 +33,7 @@ Time | Lesson | Leader | Lesson Materials
 **11:30 AM-1 PM** | break (90 minutes) | n/a | n/a
 **1-2:30 PM** | Command Line Metadata analysis (90 minutes) | Christina | [Metadata_Breakers.md](Metadata_Breakers.md)
 **2:30-2:45 PM** | break (15 minutes) | n/a | n/a
-**2:45-4:15 PM** | OpenRefine (90 minutes) | Scotty | n/a
+**2:45-4:15 PM** | OpenRefine (90 minutes) | Scotty | [OpenRefine.md](OpenRefine.md)
 **4:15-4:45 PM** | Reuse this training (30 minutes) | [Gretchen](mailto:gretchen@dp.la) | [Slides](https://docs.google.com/presentation/d/1RLl0DnzHyjgQjlEDsvgGPZkI2OUYQUXxPoZEGb6f7zg/edit?usp=sharing)
 
 ## Contact Before, During, After the Workshop
