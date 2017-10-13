@@ -11,7 +11,7 @@
 * Extended Features
 
 ## What is OpenRefine?
-OpenRefine (formerly Google Refine) is a powerful tool for working with messy data, including tools for cleaning, transforming from one format into another, extending with web services, and connecting to external data. (Can OpenRefine be used to create data from scratch? No. OpenRefine is really built to work with existing data, not formal data creation.)
+OpenRefine (formerly Google Refine) is a powerful tool for working with messy data, including tools for cleaning, transforming from one format into another, extending with web services, and connecting to external data. Can OpenRefine be used to create data from scratch? No. OpenRefine is really built to work with existing data, not formal data creation, although projects can be enriched with outside data.
 
 Download links and instructions can be found [here](https://github.com/DLFMetadataAssessment/DLFMetadataQAWorkshop17/blob/master/README.md#openrefine-recommended). OpenRefine requires a working Java runtime environment, otherwise the program will not start.
 
@@ -27,20 +27,19 @@ What measures that we use to assess can be found in OpenRefine work?
 
 ## Importing Data
 
-From Refine's start screen, you can create projects structured data files, continue working on past projects, and import projects that were exported out of OpenRefine. (Do not use the **Open Project** tab to create a project -- this is only for importing existing OpenRefine projects. More on that later.)
+From Refine's start screen, you can create projects from structured data files, continue working on past projects, and import projects that were exported out of OpenRefine. (Do not use the **Open Project** tab to create a project -- this is only for importing existing OpenRefine projects. More on that later.)
+
+Refine can import TSV, CSV, Excel, JSON, and Google Data documents as well as parse raw, unformatted data copied and pasted using the Clipboard function. For this session, we will use sample data from UPenn's [Schoenberg Database of Manuscripts](https://sdbm.library.upenn.edu/), which you can download [here](https://github.com/DLFMetadataAssessment/DLFMetadataQAWorkshop17/blob/master/OR-Data/schoenberg.xml?raw=true) as an XML file; while Refine does support importing XML data, [the program suffers from a bug that can generate thousands of blank lines when importing XML](https://github.com/OpenRefine/OpenRefine/issues/1095), necessitating some upfront cleanup. Instead, I recommend converting XML data to a tabular format (CSV, TSV, etc.) before importing; the last thing we will do is export it back to an XML file.
+
+There are lots of ways to convert XML to CSV, but we can get the job done quickly in Python with the library [**xmlutils**](https://github.com/knadh/xmlutils.py); run `pip install xmlutils` in your local shell to get it. (xmlutils works best with Python 2.7.) Once installed, we can convert our XML with the command:
+
+`xml2csv --input "schoenberg.xml" --output "schoenberg.csv" --tag "record"`
 
 ![refine-1.png](images/refine-1.png)
 
-Refine can import TSV, CSV, Excel, JSON, XML, RDFXML, and Google Data documents as well as parse raw, unformatted data copied and pasted using the Clipboard function. For this session, we will use sample data from UPenn's [Schoenberg Database of Manuscripts](https://sdbm.library.upenn.edu/), which you can download [here](). Under **Create Project**, select this file to import on the home screen.
+You should now have a CSV file containing 1,633 records. Under **Create Project**, select this file to import on the home screen. (If xmlutils is giving you a hard time, find a CSV copy of the data [here](https://github.com/DLFMetadataAssessment/DLFMetadataQAWorkshop17/raw/master/OR-Data/schoenberg.csv).)
 
-You should now see a parsing window. Here, Refine previews what your data will look like in the main interface. Refine has automatically skipped the first row of data and parsed them to column headers. (This can be changed, if need be.) As you change parameter, so will the preview.
-
-We need to set a few parameters for our imported data:
-
-* Refine does not choose a default character encoding, so set it to **UTF-8**.
-* Uncheck all of the parsing options in the bottom right-hand corner except "Store blank cells as nulls."
-
-![refine-2.png](images/refine-2.png)
+You should now see a parsing window. Here, Refine previews what your data will look like in the main interface. Refine has automatically skipped the first row of data and parsed them to column headers. (This can be changed, if need be.) As you change parameter, so will the preview. Refine does not choose a default character encoding, so make sure you set it to **UTF-8**.
 
 Click **Create Project**.
 
@@ -222,11 +221,10 @@ In any case, these are the right records, so we will click the double checkmark 
 So we're done, right? **Nope.** All we have right now is the standard VIAF name form of the entity. This is good, but we still need to extract this name form to its own column, its identifier, or both.
 
 On the Authors column, select **Edit column** > **Add column based on this column...**. In the transformation window, enter your GREL:
+`'https://viaf.org/viaf/' + cell.recon.match.id + '/'`
+This will not only extract the identifier for the entity, but create the full VIAF URI. Name this column **VIAF**.
 
-* `cell.recon.match.id` will extract the identifier for the entity; you can create the full VIAF uri by using `'https://viaf.org/viaf/' + cell.recon.match.id + '/'` instead
-* if the name form is different than what was there before, you can choose `cell.recon.match.name` to extract that version
-
-Once you have everything you need, your reconciliation data can be summarily dispatched by selecting **Reconcile** > **Actions** > **Clear reconciliation data**.
+Once you have this new column, your reconciliation data can be summarily dispatched by selecting **Reconcile** > **Actions** > **Clear reconciliation data**.
 
 #### Other Reconciliation Services
 
@@ -246,13 +244,35 @@ Christina Harlow's [Library of Congress reconciler](https://github.com/cmh2166/l
 
 ## Extended Features
 
-### Cross, OpenRefine's VLOOKUP Function
-
-Coming soon.
-
 ### Enriching with External Data Sources & APIs
 
-Coming soon.
+[explanation]
+
+1. First, [download this Refine project](https://github.com/DLFMetadataAssessment/DLFMetadataQAWorkshop17/blob/master/OR-Data/Auction-Houses.openrefine.tar.gz?raw=true), which contains some of the addresses of auction houses found in our Schoenberg data.
+2. Open a new browser tab and navigate to http://127.0.0.1:3333/, which will open a new Refine window. Click the lefthand **Import Project** tab and open *Auction-Houses.openrefine.tar.gz*. You should be looking at a previously worked on Refine project with two columns: *Company* and *Address*.
+3. On the dropdown for *Address*, select **Add Column** > **Add column by fetching URLs**. Name this new column *JSON*.
+4. Run this GREL expression: `"https://maps.googleapis.com/maps/api/geocode/json?address=" + escape(value,"url")`
+
+The new column should be filled with JSON data from Google's Maps API. Now let's get the latitude and longitude coordinates for each address.
+
+5. On the dropdown for *JSON*, select **Add Column** > **Add column based on this column**. Name this new column *Coordinates*.
+6. Run this GREL expression: `value.parseJson().results[0]["geometry"]["location"]["lat"] + ',' + value.parseJson().results[0]["geometry"]["location"]["lng"]`
+
+This new column is filled with parsed JSON data featuring the exact coordinates for each address.
+
+### Cross, OpenRefine's VLOOKUP Function
+
+Now that we have geo-coordinates, let's go back to our Schoenberg project and enrich the data with this new geographic information. To do this, we can use a **Cross** GREL, a command not unlike a VLOOKUP formula in Excel.
+
+The structure of a Cross GREL expression looks like this:
+
+`cell.cross("[Source Project]", "[Matching Column]")[0].cells["[Column Data We Want]"].value`
+
+So, we will select **Add Column** > **Add column based on this column** on *PrimarySeller* and make a new column, *LatLng*, using this GREL expression:
+
+`cell.cross("Auction-Houses", "Company")[0].cells["Coordinates"].value`
+
+You should now have a new column of coordinates next to *PrimarySeller*.
 
 ### Extending OpenRefine with Python/Jython Libraries
 
@@ -264,14 +284,65 @@ Coming soon.
 
 ## Getting Your Data Out of OpenRefine
 
-When your data has been cleaned to your satisfaction, you can export it to a variety of different file formats. Be sure all text filters and facet windows are closed, and that you have joined any split multi-valued data before you export! Clicking on the **Export** button in the upper right corner of the screen will display the export file formats available.
+When your data has been cleaned to your satisfaction, you can export it to a variety of different file formats. Be sure all text filters and facet windows are closed, and that you have joined any split multi-valued data before you export! Clicking on the **Export** button in the upper right corner of the screen will display the export file formats available. **Export Project**, on the other hand, will save a copy of your Refine project as a TAR archive that can be shared with other people and opened in other Refine installations.
 
-**Export Project**, on the other hand, will save a copy of your Refine project as a TAR archive that can be shared with other people and opened in other Refine installations.
+Refine's **Templating** function allows you to export your data in a "roll your own" fashion. As Refine's wiki states, "this is useful for formats that we don't support natively yet, or won't support." Currently, Templating is set up to generate a single JSON document of your data by default; with a few changes, we can set up a template to get our enriched Schoenberg data back to an XML file.
 
-### Templating
+Prefix:
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<records>
+[line break]
+```
 
-Refine's Templating function allows you to export your data in a "roll your own" fashion. As Refine's wiki states, "this is useful for formats that we don't support natively yet, or won't support." Currently, Templating is set up to generate a single JSON document of your data by default; other people have developed guides and schemas to template in other formats:
+Row template:
+```
+   <record>
+      <Duplicates>{{escape(cells["Duplicates"].value,"xml")}}</Duplicates>
+      <ID>{{cells["ID"].value,"xml")}}</ID>
+      <CatOrTranslateDate>{{escape(cells["CatOrTranslateDate"].value,"xml")}}</CatOrTranslateDate>
+      <PrimarySeller>{{escape(cells["PrimarySeller"].value,"xml")}}</PrimarySeller>
+      <LatLng>{{escape(cells["LatLng"].value,"xml")}}</LatLng>
+      <SecondarySeller>{{escape(cells["SecondarySeller"].value,"xml")}}</SecondarySeller>
+      <InstitutionOrCollection>{{escape(cells["InstitutionOrCollection"].value,"xml")}}</InstitutionOrCollection>
+      <Buyer>{{escape(cells["Buyer"].value,"xml")}}</Buyer>
+      <CatalogueID>{{escape(cells["CatalogueID"].value,"xml")}}</CatalogueID>
+      <LotOrCat>{{escape(cells["LotOrCat"].value,"xml")}}</LotOrCat>
+      <Price>{{escape(cells["Price"].value,"xml")}}</Price>
+      <Currency>{{escape(cells["Currency"].value,"xml")}}</Currency>
+      <Sold>{{escape(cells["Sold"].value,"xml")}}</Sold>
+      <Source>{{escape(cells["Source"].value,"xml")}}</Source>
+      <CurrentLocation>{{escape(cells["CurrentLocation"].value,"xml")}}</CurrentLocation>
+      <Author>{{escape(cells["Author"].value,"xml")}}</Author>
+      <AuthorVariant>{{escape(cells["AuthorVariant"].value,"xml")}}</AuthorVariant>
+      <VIAF>{{escape(cells["VIAF"].value,"xml")}}</VIAF>
+      <Title>{{escape(cells["Title"].value,"xml")}}</Title>
+      <Language>{{escape(cells["Language"].value,"xml")}}</Language>
+      <Material>{{escape(cells["Material"].value,"xml")}}</Material>
+      <Place>{{escape(cells["Place"].value,"xml")}}</Place>
+      <LiturgicalUse>{{escape(cells["LiturgicalUse"].value,"xml")}}</LiturgicalUse>
+      <Date>{{escape(cells["Date"].value,"xml")}}</Date>
+      <Circa>{{escape(cells["Circa"].value,"xml")}}</Circa>
+      <Artist>{{escape(cells["Artist"].value,"xml")}}</Artist>
+      <Scribe>{{escape(cells["Scribe"].value,"xml")}}</Scribe>
+      <Folios>{{escape(cells["Folios"].value,"xml")}}</Folios>
+      <Columns>{{escape(cells["Columns"].value,"xml")}}</Columns>
+      <Lines>{{escape(cells["Lines"].value,"xml")}}</Lines>
+      <Height>{{escape(cells["Height"].value,"xml")}}</Height>
+      <Width>{{escape(cells["Width"].value,"xml")}}</Width>
+      <Binding>{{escape(cells["Binding"].value,"xml")}}</Binding>
+      <Provenance>{{escape(cells["Provenance"].value,"xml")}}</Provenance>
+      <Comments>{{escape(cells["Comments"].value,"xml")}}</Comments>
+   </record>
+```
 
-* [MODS](https://gist.github.com/sallain/7604ffb0c155294fcfaf)
-* [XML](http://blogs.bl.uk/digital-scholarship/2015/12/using-open-refine-to-create-xml-records-for-wikimedia-batch-upload-tool.html)
-* [YAML](https://github.com/OpenRefine/OpenRefine/wiki/Export-As-YAML)
+Row separator:
+```
+[line break]
+```
+
+Suffix:
+```
+[line break]
+</records>
+```
