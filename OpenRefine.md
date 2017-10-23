@@ -317,13 +317,13 @@ Coming soon.
 
 When your data has been cleaned to your satisfaction, you can export it to a variety of different file formats. Be sure all text filters and facet windows are closed, and that you have joined any split multi-valued data before you export! Clicking on the **Export** button in the upper right corner of the screen will display the export file formats available. **Export Project**, on the other hand, will save a copy of your Refine project as a TAR archive that can be shared with other people and opened in other Refine installations.
 
-Refine's **Templating** function allows you to export your data in a "roll your own" fashion. As Refine's wiki states, "this is useful for formats that we don't support natively yet, or won't support." Currently, Templating is set up to generate a single JSON document of your data by default; with a few changes, we can set up a template to get our enriched Schoenberg data back to an XML file.
+Refine's **Templating** function allows you to export your data in a "roll your own" fashion. As Refine's wiki states, "this is useful for formats that we don't support natively yet, or won't support." Currently, Templating is set up to generate a single JSON document of your data by default; with a few changes, we can set up a template to get our enriched Schoenberg data back to an XML file. You'll need to fill out these spaces with the below template:
 
 Prefix:
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <records>
-[line break]
+[blank line break]
 ```
 
 Row template:
@@ -369,11 +369,23 @@ Row template:
 
 Row separator:
 ```
-[line break]
+[blank line break]
 ```
 
 Suffix:
 ```
-[line break]
+[blank line break]
 </records>
 ```
+
+Once you have the output file, you can validate its well-formedness to be extra sure your data came out all right. You can do this a bunch of ways; I like using `xmlwf`, a tool that comes with the [`expat` XML parsing package](https://libexpat.github.io/).
+
+To validate, run the command:
+
+```
+xmlwf -v [file name].xml
+```
+
+If all is well, you shouldn't see any error reports:
+
+![refine-10.png](images/refine-10.png)
