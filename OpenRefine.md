@@ -60,19 +60,44 @@ Let's move the ID column to the first position: from the drop-down, select **Edi
 
 Set the view to Records.
 
+### Undo/Redo & Applying Saved Actions
+
+OpenRefine lets you undo (and redo) any number of the transformations you will enact on your imported data. Your Undo/Redo history is stored with the Project and is saved automatically as you work, so the next time you open the project, you can access your full history of transformations; this means you can always try out transformations and wipe them if needed.
+
+The 'Undo' and 'Redo' options are accessed via the lefthand panel, which lists all the steps you have undertaken. To undo, simply click on the last step you want to preserve in the list. This will automatically wipe out all the changes made after that step. The remaining steps will continue to show as greyed out; you can reapply them by simply clicking on the last step you want to apply. However, if you undo something and then apply new transformations, the greyed out steps will disappear completely, so make sure you don't need to save any of these steps before you get back to work!
+
+This method will also allow you to take your work on one dataset and apply it to another via simple copy-paste. If you wish to save what you have done to be re-applied later, or to an entirely different project, click **Extract**. This allows you to copy any of the steps (or all of them) as JSON (Javascript Object Notation). This JSON data can be saved to separate file and used later by clicking the **Apply** button and pasting in the JSON data.
+
+Currently, we have only one history step: moving a column. The JSON for this step looks like this:
+
+```
+[
+  {
+    "op": "core/column-move",
+    "description": "Move column ID to position 0",
+    "columnName": "ID",
+    "index": 0
+  }
+]
+```
+
+(Notice that all of this is structured, and therefore could be automated. The transofrmation itself is idenitfied by the `op` data, the enacted column is `columnName`, and the `index` is where the column was moved; the `description` value is what we sdee in the lefthand panel. If we wanted to, we could manually sort all of our columns by copy this JSON data, making a few changes to the `description`, `columnName`, and `index` data values.)
+
 ### Sorting
 
 You can sort data in OpenRefine by to the drop-down menu and choosing **Sort**. Once you have sorted the data, a new 'Sort' drop-down menu will be displayed that lets you amend the existing sort (e.g., reverse the sort order), remove existing sorts, and/or make sorts permanent.
 
-Let's sort by the ID column:
+Let's try it ourselves on the ID column -- the data is (mostly) already sorted from earliest ID to latest, so we will reverse this: 
 
 ![refine-4.png](images/refine-4.png)
 
-Sorts in OpenRefine are temporary -- if you remove the Sort, the data will go back to its original 'unordered' state.
+(Of course, it is imperative to let Refine know that we are sorting numbers and not strings of text, otherwise our sort will nto be as expected.)
+
+Note that in the furthest lefthand column, the Refine-appointed row ID numbers are still tied to their original rows. This is because sorts in OpenRefine are temporary -- if you remove the Sort, the data will go back to its original "unordered" form. You can do this by selecting **Sort** > **Remove Sort**.
 
 ### Splitting & Joining Multi-Valued Cells
 
-Historically, tabular data often contains one value per field. But increasingly, data can have multiple values per certain fields. Refine can easily break apart this data and put it back together later when data transformation is complete. To do this, return to a column drop-down and select **Edit Cells** > **Split Multi-Valued Cells**.
+Historically, tabular data often contains one value per field. But increasingly, data can have multiple values per certain fields. Refine can easily break apart this data and put it back together later when data transformation is complete. To do this, select **Edit Cells** > **Split Multi-Valued Cells** on a column's dropdown menu.
 
 Let's try this on the Provenance column. Enter a single pipe character (|) in the pop-up menu:
 
@@ -80,11 +105,11 @@ Let's try this on the Provenance column. Enter a single pipe character (|) in th
 
 Whenever we're done, we can rejoin this split data by selecting **Edit Cells** > **Split Multi-Valued Cells** and choosing the appropriate delimiter.
 
-### Facets & Filters
+## OpenRefine's Power Tools
+
+### Faceting
 
 The core of Refine's power lies in its use of Facets and Filtering. Facets allow you to take a macro-level look at a large amount of data by counting individual pieces of column data, and listing them. Filtering can also allow you to select subsets of your data to act on, instead of changing entire columns.
-
-#### Faceting
 
 Facet information appears in the left hand panel in the OpenRefine interface. Refine supports a range of other types of facet. These include:
 
@@ -93,7 +118,7 @@ Facet information appears in the left hand panel in the OpenRefine interface. Re
 * **Scatterplot** facets are less commonly used ([see this tutorial for more information](http://enipedia.tudelft.nl/wiki/OpenRefine_Tutorial#Exploring_the_data_with_scatter_plots)).
 * **Custom** facets offer a range of different customized facets, and also allow you write your own.
 
-We are primarily interested in Text facets. Let's create a facet on our split-value Provenance column. Select: **Facet** > **Text facet**. A new facet should appear in the lefthand window:
+For our examples, we are primarily interested in Text facets. Let's create a facet on our split-value Provenance column. Select: **Facet** > **Text facet**. A new facet should appear in the lefthand window:
 
 ![refine-6.png](images/refine-6.png)
 
@@ -101,7 +126,15 @@ Clicking on any of the entries in the facet window will change the interface to 
 
 If you move your mouse pointer over an entry in the facet window, you'll also see the option to **Edit** the term comes up. By changing the text in the edit box and clicking Apply, you will automatically change all instances in the data at once.
 
-#### Filtering
+#### Flag and Star Faceting
+
+As you may have noticed, for each row in Refine, the Master column contains clickable Star and Flag icons. These icons can be used to "save" particular rows for later work or export; for example, if you have questions about a certain row's column value, you can apply either of the icons and later facet on it later. On the dropdown next to the *All* column, you can choose **Facet by Flag** or **Facet by Star**. Selecting *True* will return all of the rows/records which carries a selected flag/star icon; *false* give you the opposite.
+
+Star/Flag faceting can be used to "stack" facets on your data: if you star/flag rows, and then facet on only them, you can create successive facets underneath, which will be inherently limited to the values of your starred/flagged rows.
+
+Another use of star/flag faceting is removing empty or problematic rows from your dataset. Once you have faceted on these rows, you can select the *All* dropdown to **Edit rows** > **Remove all matching rows**. Of course, ***beware the fact that removing faceted rows in Records mode will remove the entire "record" of rows.***
+
+### Filtering
 
 You can also apply Text Filters which looks for a particular piece of text appearing in a column. Click the drop down menu at the top of the column you want to filter and choose **Text filter**. In the facet area, a filter box will appear. Type in the text you want to use in the Filter to display only rows which contain that text in the selected column.
 
@@ -117,22 +150,13 @@ The Clusters from our dataset are mostly textual inconsistencies -- spelling, ca
 
 Clustering can raise some interesting questions: *What is the formatting standard for this data? How should these categories be entered?*
 
-##### Exercise
+#### Exercise
 The default Cluster method, Key Collision/Fingerprint, is designed to provide as few false-positive results as possible. Other cluster functions will give you a wide range of supposed inconsistencies. Take 5 minutes to play around with the clustering results.
 
 #### Note
 >It is worth noting that clustering in OpenRefine works only at the syntactic level (the character composition of the cell value) and while very useful to spot errors, typos, and inconsistencies it's by no means enough to perform effective semantically-aware reconciliation.
 
 For more information on the methods used to create Clusters, see [this article](https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth).
-
-### Undo/Redo & Applying Saved Actions
-
-OpenRefine lets you undo (and redo) any number of effects you have taken upon your data the data. Undo/Redo data is stored with the Project and is saved automatically as you work, so next time you open the project, you can access your full history of steps you have carried out; this means you can always try out transformations and 'undo' them if need be.
-
-The 'Undo' and 'Redo' options are accessed via the lefthand panel. The panel lists all the steps you've taken so far. To undo steps, simply click on the last step you want to preserve in the list and this will automatically undo all the changes made since that step. The remaining steps will continue to show in the list but greyed out, and you can reapply them by simply clicking on the last step you want to apply. However, if you 'undo' a set of steps and then start doing new transformations, the greyed out steps will disappear and you will no longer have the option to 'redo' these steps.
-
-The way OpenRefine records your actions even allows you to take your work on one dataset and apply it to another by a simple copy-and-paste operation.
-If you wish to save what you have done to be re-applied later, or to an entirely different project, you can click **Extract**. This allows you to copy any of the steps (or all of them) into JSON (Javascript Object Notation). This JSON data can be saved to separate file and used later by clicking the **Apply** button and pasting in the JSON data.
 
 ### GREL Expressions
 
@@ -165,7 +189,7 @@ GREL expressions are written as a function being applied to some kind of data va
 
 ![refine-8.png](images/refine-8.png)
 
-##### Exercise 1
+#### Exercise 1
 
 Try out these GREL expressions on the Provenance column. You don't need to actually change the data, but do watch the previews on the command window and report any problems you run into!
 
@@ -173,9 +197,9 @@ Try out these GREL expressions on the Provenance column. You don't need to actua
 * Replace a string of text: `value.replace('a', '@@@'))`
 * You can also stack commands on top of each other: split apart strings by whitespace and then re-join them with pipes using `value.split(' ').join('|')`
 
-##### Exercise 2
+#### Exercise 2
 
-Open a transformation window on the Cat./Trans. Date column. We can guess these are probably dates, but right now, they are incohereant strings. Let's fix them!
+Open a transformation window on the *CatOrTranslateDate* column. We can guess these are probably dates, but right now, they are incohereant strings. Let's fix them!
 
 Stack these three commands:
 
@@ -226,11 +250,11 @@ This will not only extract the identifier for the entity, but create the full VI
 
 Once you have this new column, your reconciliation data can be summarily dispatched by selecting **Reconcile** > **Actions** > **Clear reconciliation data**.
 
-#### Other Reconciliation Services
+### Other Reconciliation Services
 
 There are a few services where you can find an OpenRefine Reconciliation option available:
 
-##### Wikidata
+#### Wikidata
 
 A recon service for Wikidata is now standard in the latest version of OpenRefine, replacing the now-defunct Freebase service. (Google's Knowledge Graph was powered in part by Freebase; Google migrated to Wikidata in 2014.)
 
@@ -238,11 +262,11 @@ The Wikidata reconciler needs a specific Data Type to match with; in many cases,
 
 ![refine-9.png](images/refine-9.png)
 
-##### LC-Reconcile
+#### LC-Reconcile
 
 Christina Harlow's [Library of Congress reconciler](https://github.com/cmh2166/lc-reconcile) is also a fab resource worth mentioning!
 
-## Extended Features
+## Extended OR Power Tools
 
 ### Enriching with External Data Sources & APIs
 
