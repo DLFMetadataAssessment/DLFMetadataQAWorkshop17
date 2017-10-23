@@ -226,7 +226,7 @@ Let's try out a Reconciliation example using [Jeff Chiu's](https://github.com/co
 
 **(Note: you may see the Records count jump from 1,633 to 1,679. This is because the dataset includes "empty" values within this column. In the below picture, note the successive pipes ("|||") and the values that begin with pipes ("|Bonaventure, Saint, Cardinal"):**
 
-![refine-8.png](images/refine-8.png)
+![refine-8b.png](images/refine-8b.png)
 
 **This will cause empty rows, and by extension, a false record count. We can combat this by joining these values, and splitting them again. This should correct the issue.)**
 
@@ -305,13 +305,9 @@ So, we will select **Add Column** > **Add column based on this column** on *Prim
 
 You should now have a new column of coordinates next to *PrimarySeller*.
 
-### Extending OpenRefine with Python/Jython Libraries
-
-Coming soon.
-
 ### Extensions
 
-Coming soon.
+OpenRefine has a number of interesting extensions that can be installed to extend the program features. See [the OR download page](http://openrefine.org/download.html) for a list of these extensions; see [this page for download help](https://github.com/OpenRefine/OpenRefine/wiki/Installing-Extensions).
 
 ## Getting Your Data Out of OpenRefine
 
