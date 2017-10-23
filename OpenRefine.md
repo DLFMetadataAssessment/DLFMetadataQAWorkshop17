@@ -2,8 +2,6 @@
 
 *2:45 - 4:15 PM, led by [Scotty Carlson, Metadata Coordinator @ Fondren Library, Rice University](mailto:sjc5@rice.edu)*
 
-## Note: this outline is still under construction. Please check back closer to the workshop for a final version.
-
 ## Goals
 * Introduce the OpenRefine Interface
 * Basic Data Interactions
