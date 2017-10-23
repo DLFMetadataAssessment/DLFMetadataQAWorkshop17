@@ -223,6 +223,13 @@ Reconciliation allows you to match your data against external data services to r
 Let's try out a Reconciliation example using [Jeff Chiu's](https://github.com/codeforkjeff) VIAF Reconciliation service. (Note: Jeff's original version of this reconciliation service has been superseded by a new version, which can be found [here](https://github.com/codeforkjeff/conciliator). However, since our needs are super low for this example, we can use his deprecated public server at http://refine.codefork.com/. If you plan to play around with his service on your own, use the newer version.)
 
 1. First, let's split apart the multi-value cells for the column *Author*: **Edit Cells** > **Split Multi-Valued Cells**
+
+**(Note: you may see the Records count jump from 1,633 to 1,679. This is because the dataset includes "empty" values within this column. In the below picture, note the successive pipes ("|||") and the values that begin with pipes ("|Bonaventure, Saint, Cardinal"):**
+
+![refine-8.png](images/refine-8.png)
+
+**This will cause empty rows, and by extension, a false record count. We can combat this by joining these values, and splitting them again. This should correct the issue.)**
+
 2. Next, let's facet on the column: **Facet** > **Text facet**
 3. In the facet, let's **Include** the following five author names: 'Aesop', 'Aristotle', 'Caesar, Julius', 'Chaucer, Geoffrey', and 'Dante Alighieri'. You should see 19 matching records/rows.
 4. In the dropdown menu, select **Reconcile** > **Start Reconciling**.
@@ -234,7 +241,7 @@ Reconciliation can take a lot of time if you have a lot to look up. However, we 
 
 Once the reconciliation has completed two Facets should be created automatically: **Author: Judgement** and **Author: best candidate's score**. Close the **best candidate's score** facet, but leave the **Judgement** facet open.
 
-According to the Judgement facet, 12 of our values -- Aristotle, Caesar, and Dante -- matched and 7 -- Aesop and Chaucer -- did not.
+According to the Judgement facet, 12 of our values (Aristotle, Caesar, and Dante) matched and 7 (Aesop and Chaucer) did not.
 
 Aristotle, Caesar, and Dante auto-matched because the judgement score on each search had a high enough probably that the VIAF match was correct. If we look at those values in the column, we'll see that they are now links that do indeed take us to the VIAF records for [Aristotle](https://viaf.org/viaf/7524651/), [Caesar](https://viaf.org/viaf/286265178/), and [Dante](https://viaf.org/viaf/97105654/).
 
@@ -246,7 +253,7 @@ So we're done, right? **Nope.** All we have right now is the standard VIAF name 
 
 On the Authors column, select **Edit column** > **Add column based on this column...**. In the transformation window, enter your GREL:
 `'https://viaf.org/viaf/' + cell.recon.match.id + '/'`
-This will not only extract the identifier for the entity, but create the full VIAF URI. Name this column **VIAF**.
+This will not only extract the identifier for the entity, but create the full VIAF URI. Name this column **viafID**.
 
 Once you have this new column, your reconciliation data can be summarily dispatched by selecting **Reconcile** > **Actions** > **Clear reconciliation data**.
 
@@ -339,7 +346,7 @@ Row template:
       <CurrentLocation>{{escape(cells["CurrentLocation"].value,"xml")}}</CurrentLocation>
       <Author>{{escape(cells["Author"].value,"xml")}}</Author>
       <AuthorVariant>{{escape(cells["AuthorVariant"].value,"xml")}}</AuthorVariant>
-      <VIAF>{{escape(cells["VIAF"].value,"xml")}}</VIAF>
+      <viafID>{{escape(cells["VIAF"].value,"xml")}}</viafID>
       <Title>{{escape(cells["Title"].value,"xml")}}</Title>
       <Language>{{escape(cells["Language"].value,"xml")}}</Language>
       <Material>{{escape(cells["Material"].value,"xml")}}</Material>
