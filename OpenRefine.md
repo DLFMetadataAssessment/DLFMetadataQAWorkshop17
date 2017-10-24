@@ -262,8 +262,6 @@ Once the transformation is run, you should be left with 1,633 records again.
 
 ## Validating Data
 
-***Assessment question: Can the data be validated externally?***
-
 ### Reconciliation
 
 Reconciliation allows you to match your data against external data services to reconcile known entities. Remember when we said clustering works only at the syntactic level, and can't perform semantically-aware reconciliation? This function fills in that gap; the only trick is, it requires external data resources to support the service. (Full info on Reconciliation can be found [here](https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation-Service-API).)
