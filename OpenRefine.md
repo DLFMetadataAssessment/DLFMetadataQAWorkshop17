@@ -220,7 +220,7 @@ Try out these GREL expressions on the Provenance column. You don't need to actua
 
 #### Exercise 1: Converting to Intelligible Data
 
-<detail>
+<details>
 
 Open a transformation window on the *CatOrTranslateDate* column. We can guess these are probably dates, but right now, they are incoherent strings. Let's fix them!
 
@@ -234,11 +234,11 @@ Stack these three commands:
 
 In the main Refine window, your column values should be in green, indicating they are no longer text strings.
 
-</detail>
+</details>
 
 #### Exercise 2: Removing Problematic Delimiters
 
-<detail>
+<details>
 
 If you split apart multi-values for the *Author* column, you may see the Records count jump from 1,633 to 1,679. This is because the dataset includes "empty" values (ie, only pipe-delimiters) within this column. In the below picture, note the successive pipes ("||||") and the values that begin with pipes ("|Bonaventure, Saint, Cardinal"):
 
@@ -258,8 +258,7 @@ The first value of this Replace command is a RegEx that isolates the pipe charac
 
 Once the transformation is run, you should be left with 1,633 records again.
 
-
-</detail>
+</details>
 
 ## Validating Data
 
