@@ -2,26 +2,47 @@
 
 *2:45 - 4:15 PM, led by [Scotty Carlson, Metadata Coordinator @ Fondren Library, Rice University](mailto:sjc5@rice.edu)*
 
-## Goals
-* Introduce the OpenRefine Interface
-* Basic Data Interactions
-* Program Features
-* Extended Features
+## Goals of This Module:
+* Basic Data Assessment
+* Data Remediation
+* Data Validation
+* Data Enhancement
 
 ## What is OpenRefine?
-OpenRefine (formerly Google Refine) is a powerful tool for working with messy data, including tools for cleaning, transforming from one format into another, extending with web services, and connecting to external data. Can OpenRefine be used to create data from scratch? No. OpenRefine is really built to work with existing data, not formal data creation, although projects can be enriched with outside data.
+OpenRefine (formerly Google Refine) is a powerful tool for working with messy data, including tools for cleaning, transforming from one format into another, extending with web services, and connecting to external data.
 
-Download links and instructions can be found [here](https://github.com/DLFMetadataAssessment/DLFMetadataQAWorkshop17/blob/master/README.md#openrefine-recommended). OpenRefine requires a working Java runtime environment, otherwise the program will not start.
+Can OpenRefine be used to create data from scratch? Not really. OpenRefine is built to work with existing data, although projects can be enriched with outside data.
 
-Upon launch, OpenRefine will run as a local server, opening in your computer's browser. As long as OpenRefine is running, you can point your browser at either http://127.0.0.1:3333/ or http://localhost:3333/ to use it, even in several browser tabs/windows.
+Download links and instructions can be found [here](https://github.com/DLFMetadataAssessment/DLFMetadataQAWorkshop17/blob/master/README.md#openrefine-recommended). OpenRefine requires a working Java runtime environment, otherwise the program will not start. Upon launch, OpenRefine will run as a local server, opening in your computer's browser. As long as OpenRefine is running, you can point your browser at either http://127.0.0.1:3333/ or http://localhost:3333/ to use it, even in several browser tabs/windows.
 
-## Objectives
-What measures that we use to assess can be found in OpenRefine work?
+## Module Objectives
 
-* Completeness: Checking to see what elements/properties/attributes are present (and how much is missing)
-* Accuracy: Information is correct and factual
-* Conformance to expectations: Values adhere to your expectations
-* Consistency: Values are consistent within your domain, elements are represented in a consistent manner
+Which of our assessment measures can be addressed with OpenRefine?
+
+* Completeness: Checking to see what elements/properties/attributes are present (and how much of it is missing!)
+* Accuracy: Information is correct and factual (to the best of our abilities)
+* Conformance to expectations: Information adheres to our expectations
+* Consistency: Values are consistent within our domain, elements are represented in a consistent manner
+
+Based on these assessment measures, what assessment techniques can be applied to work in OpenRefine?
+
+* Do the number of rows/records match up to expectations?
+* Which unique elements/fields are represented in the data?
+* How much of each represented element/field is empty?
+* Does the data need to be converted to intelligible formatting?
+* Are data values/terms used consistently? If not, what is the formatting/entry standard for this data?
+* Can the data be validated externally?
+* Can the data be enriched with new information?
+
+## Table of Contents
+
+* Importing Data
+* The OR Interface
+* Assessment Tools
+* Data Remediation
+* Validating Data
+* Data Enhancement
+* Getting Data Out
 
 ## Importing Data
 
@@ -41,14 +62,16 @@ You should now see a parsing window. Here, Refine previews what your data will l
 
 Click **Create Project**.
 
-## The Interface
+## The OR Interface
 After the data loads, you will be staring at the default Refine interface for your new project. In the upper lefthand corner, you will see your project name (which can be changed by clicking on it) next to the OpenRefine logo. (If you need to return to the starting screen, click that logo.)
 
 Each of the columns in the data have drop-down menus (the upside down triangles). When you select an option in a particular column (e.g. to make a change to the data), it will affect all the cells in the column currently selected. (We will discuss this more below in Faceting). The column at the extreme left of the screen is the **All Data** menu. The All drop-down will let you make changes across all columns in one pass. It also manages the Star and Flag toggles -- more on that in Faceting.
 
 ### Rows vs. Records
 
-OpenRefine has two modes of viewing data: Rows and Records. Upon project creation, the default setting is Rows mode, where each row represents a single record in the data set -- in our case, one entry in the database. In Records mode, OpenRefine can group multiple rows as belonging to the same Record. Multi-row records happen when Refine detects multiple values within the selected record or node. However, like a database, the first column needs to act as "Key" column; if the first column has empty cells, as ours does, these will be erroneously treated as part of the previous record:
+OpenRefine has two modes of viewing data: Rows and Records. Upon project creation, the default setting is Rows mode, where each row represents a single record in the data set -- in our case, one entry in the database. In Records mode, OpenRefine can group multiple rows as belonging to the same Record. Multi-row records happen when Refine detects multiple values within the selected record or node.
+
+Like a database, the first column needs to act as "Key" column; if the first column has empty cells, as ours does, these will be erroneously treated as part of the previous record:
 
 ![refine-3.png](images/refine-3.png)
 
@@ -85,25 +108,15 @@ Currently, we have only one history step: moving a column. The JSON for this ste
 
 You can sort data in OpenRefine by to the drop-down menu and choosing **Sort**. Once you have sorted the data, a new 'Sort' drop-down menu will be displayed that lets you amend the existing sort (e.g., reverse the sort order), remove existing sorts, and/or make sorts permanent.
 
-Let's try it ourselves on the ID column -- the data is (mostly) already sorted from earliest ID to latest, so we will reverse this: 
+Let's try it ourselves on the ID column -- the data is (mostly) already sorted from earliest ID to latest, so we will reverse this:
 
 ![refine-4.png](images/refine-4.png)
 
-(Of course, it is imperative to let Refine know that we are sorting numbers and not strings of text, otherwise our sort will nto be as expected.)
+(Of course, it is imperative to let Refine know that we are sorting numbers and not strings of text, otherwise our sort will not be as expected.)
 
 Note that in the furthest lefthand column, the Refine-appointed row ID numbers are still tied to their original rows. This is because sorts in OpenRefine are temporary -- if you remove the Sort, the data will go back to its original "unordered" form. You can do this by selecting **Sort** > **Remove Sort**.
 
-### Splitting & Joining Multi-Valued Cells
-
-Historically, tabular data often contains one value per field. But increasingly, data can have multiple values per certain fields. Refine can easily break apart this data and put it back together later when data transformation is complete. To do this, select **Edit Cells** > **Split Multi-Valued Cells** on a column's dropdown menu.
-
-Let's try this on the Provenance column. Enter a single pipe character (|) in the pop-up menu:
-
-![refine-5.png](images/refine-5.png)
-
-Whenever we're done, we can rejoin this split data by selecting **Edit Cells** > **Split Multi-Valued Cells** and choosing the appropriate delimiter.
-
-## OpenRefine's Power Tools
+## Assessment Tools
 
 ### Faceting
 
@@ -116,27 +129,33 @@ Facet information appears in the left hand panel in the OpenRefine interface. Re
 * **Scatterplot** facets are less commonly used ([see this tutorial for more information](http://enipedia.tudelft.nl/wiki/OpenRefine_Tutorial#Exploring_the_data_with_scatter_plots)).
 * **Custom** facets offer a range of different customized facets, and also allow you write your own.
 
-For our examples, we are primarily interested in Text facets. Let's create a facet on our split-value Provenance column. Select: **Facet** > **Text facet**. A new facet should appear in the lefthand window:
-
-![refine-6.png](images/refine-6.png)
+Let's create a facet on the *Binding* column. Select: **Facet** > **Text facet**. A new facet should appear in the lefthand window.
 
 Clicking on any of the entries in the facet window will change the interface to include only the record(s) featuring that facet entry. (If we had set our view to Rows, only the specific rows containing that facet entry would appear.) If you move your mouse pointer over an entry in the facet window, you can select multiple facet entries using the **Include** popup next to each entry. You can also select **Invert** at the top of the facet window to automatically select the opposite of the values you chose.
 
 If you move your mouse pointer over an entry in the facet window, you'll also see the option to **Edit** the term comes up. By changing the text in the edit box and clicking Apply, you will automatically change all instances in the data at once.
 
-#### Flag and Star Faceting
+In terms of assesssment, how much of each represented element/field is empty? Try creating a custom facet for empty values: **Facet** > **Customized Facets** > **Facet by Blank**
 
-As you may have noticed, for each row in Refine, the Master column contains clickable Star and Flag icons. These icons can be used to "save" particular rows for later work or export; for example, if you have questions about a certain row's column value, you can apply either of the icons and later facet on it later. On the dropdown next to the *All* column, you can choose **Facet by Flag** or **Facet by Star**. Selecting *True* will return all of the rows/records which carries a selected flag/star icon; *false* give you the opposite.
-
-Star/Flag faceting can be used to "stack" facets on your data: if you star/flag rows, and then facet on only them, you can create successive facets underneath, which will be inherently limited to the values of your starred/flagged rows.
-
-Another use of star/flag faceting is removing empty or problematic rows from your dataset. Once you have faceted on these rows, you can select the *All* dropdown to **Edit rows** > **Remove all matching rows**. Of course, ***beware the fact that removing faceted rows in Records mode will remove the entire "record" of rows.***
+The faceted values for *True* are cells that are empty, giving us an idea of how much data is missing. (Of course, this doesn't answer WHY the data is missing.)
 
 ### Filtering
 
 You can also apply Text Filters which looks for a particular piece of text appearing in a column. Click the drop down menu at the top of the column you want to filter and choose **Text filter**. In the facet area, a filter box will appear. Type in the text you want to use in the Filter to display only rows which contain that text in the selected column.
 
-In our data, typing *Abbey* will limit what we see to only the 115 records who values in the Facet contain the word Abbey. If we change the view to Rows, that will limit us to see the 117 *rows* of our data that contain Abbey.
+In our data, typing *skin* will limit what we see to only the 3 records who values in the Facet contain the word skin somewhere.
+
+### Splitting & Joining Multi-Valued Cells
+
+Historically, tabular data often contains one value per field. But increasingly, data can have multiple values per certain fields. Refine can easily break apart this data and put it back together later when data transformation is complete. To do this, select **Edit Cells** > **Split Multi-Valued Cells** on a column's dropdown menu.
+
+Let's try this on the Provenance column. Enter a single pipe character (|) in the pop-up menu:
+
+![refine-5.png](images/refine-5.png)
+
+Whenever we're done, we can rejoin this split data by selecting **Edit Cells** > **Split Multi-Valued Cells** and choosing the appropriate delimiter.
+
+## Data Remediation
 
 ### Clustering
 
@@ -146,15 +165,19 @@ On the Provenance facet window, close all filters or individual data selections,
 
 The Clusters from our dataset are mostly textual inconsistencies -- spelling, capitalization, etc. For each, you have the option of merging the values together, replacing inconsistencies with a single, consistent value. By default OpenRefine uses the most common value in the cluster as the new value, but you can select one of the other values by clicking the value itself, or you can simply type the desired value into the New Cell Value box.
 
-Clustering can raise some interesting questions: *What is the formatting standard for this data? How should these categories be entered?*
+Clustering can raise some interesting assessment questions: ***Are data values/terms used consistently? If not, what is the formatting/entry standard for this data?***
 
 #### Exercise
+<detail>
+
 The default Cluster method, Key Collision/Fingerprint, is designed to provide as few false-positive results as possible. Other cluster functions will give you a wide range of supposed inconsistencies. Take 5 minutes to play around with the clustering results.
+
+When finsihed, re-join the values with a pipe character: **Edit Cells** > **Join Multi-Valued Cells**.
+
+</detail>
 
 #### Note
 >It is worth noting that clustering in OpenRefine works only at the syntactic level (the character composition of the cell value) and while very useful to spot errors, typos, and inconsistencies it's by no means enough to perform effective semantically-aware reconciliation.
-
-For more information on the methods used to create Clusters, see [this article](https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth).
 
 ### GREL Expressions
 
@@ -181,13 +204,13 @@ Behind these menu options, however, are GREL expressions that can be applied man
 
 #### Writing GREL Expressions
 
-The transform window is where we can get deep into the grooves of Refine's power by executing custom-written GREL commands. TO get here, select from a column drop-down: **Edit Cells** > **Transform...**. Upon opening, you'll notice the word `value` is logged in the command window; this variable stands in for the original value of the cells that we aim to change. (`value` is also a valid GREL expression -- make no changes.)
+The transform window is where we can get into the grooves of Refine's power by executing custom-written GREL commands. To get here, select from a column drop-down: **Edit Cells** > **Transform...**. Upon opening, you'll notice the word `value` is logged in the command window; this variable stands in for the original value of the cells that we aim to change. (`value` is also a valid GREL expression -- make no changes.)
 
 GREL expressions are written as a function being applied to some kind of data value. Some GREL functions require additional parameters or options to control what the function does. Underneath the command window, you can see a preview of the changes your expressions will inflict.
 
 ![refine-8.png](images/refine-8.png)
 
-#### Exercise 1
+GREL transformations can also create new columns. Simply select the source column that will act as the basis for the mew and select **Edit columns** > **Add column based on this column...** from the drop-down menu. The command window will look almost the same as the Transform window. (Make sure you give your new column a name.)
 
 Try out these GREL expressions on the Provenance column. You don't need to actually change the data, but do watch the previews on the command window and report any problems you run into!
 
@@ -195,9 +218,11 @@ Try out these GREL expressions on the Provenance column. You don't need to actua
 * Replace a string of text: `value.replace('a', '@@@'))`
 * You can also stack commands on top of each other: split apart strings by whitespace and then re-join them with pipes using `value.split(' ').join('|')`
 
-#### Exercise 2
+#### Exercise 1: Converting to Intelligible Data
 
-Open a transformation window on the *CatOrTranslateDate* column. We can guess these are probably dates, but right now, they are incohereant strings. Let's fix them!
+<detail>
+
+Open a transformation window on the *CatOrTranslateDate* column. We can guess these are probably dates, but right now, they are incoherent strings. Let's fix them!
 
 Stack these three commands:
 
@@ -209,31 +234,51 @@ Stack these three commands:
 
 In the main Refine window, your column values should be in green, indicating they are no longer text strings.
 
-#### GREL For New Columns
-GREL transformations can also create new columns. Simply select the source column that will act as the basis for the mew and select **Edit columns** > **Add column based on this column...** from the drop-down menu. The command window will look almost the same as the Transform window. (Make sure you give your new column a name.)
+</detail>
 
-### Reconciling to External Data
+#### Exercise 2: Removing Problematic Delimiters
 
-Reconciliation allows you to match your data against external data services to reconcile known entities. Remember when we said clustering works only at the syntactic level, and can't perform semantically-aware reconciliation? This function fills in that gap; the only trick is, it requires external data resources to support the service. (Full info on Reconciliation can be found [here](https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation-Service-API).)
+<detail>
 
-#### VIAF Reconciliation
-
-Let's try out a Reconciliation example using [Jeff Chiu's](https://github.com/codeforkjeff) VIAF Reconciliation service. (Note: Jeff's original version of this reconciliation service has been superseded by a new version, which can be found [here](https://github.com/codeforkjeff/conciliator). However, since our needs are super low for this example, we can use his deprecated public server at http://refine.codefork.com/. If you plan to play around with his service on your own, use the newer version.)
-
-1. First, let's split apart the multi-value cells for the column *Author*: **Edit Cells** > **Split Multi-Valued Cells**
-
-**(Note: you may see the Records count jump from 1,633 to 1,679. This is because the dataset includes "empty" values within this column. In the below picture, note the successive pipes ("|||") and the values that begin with pipes ("|Bonaventure, Saint, Cardinal"):**
+If you split apart multi-values for the *Author* column, you may see the Records count jump from 1,633 to 1,679. This is because the dataset includes "empty" values (ie, only pipe-delimiters) within this column. In the below picture, note the successive pipes ("||||") and the values that begin with pipes ("|Bonaventure, Saint, Cardinal"):
 
 ![refine-8b.png](images/refine-8b.png)
 
-**This will cause empty rows, and by extension, a false record count. We can combat this by joining these values, and splitting them again. This should correct the issue.)**
+This will cause empty rows, and by extension, a false record count. We can combat this by removing these empty values.
 
-2. Next, let's facet on the column: **Facet** > **Text facet**
-3. In the facet, let's **Include** the following five author names: 'Aesop', 'Aristotle', 'Caesar, Julius', 'Chaucer, Geoffrey', and 'Dante Alighieri'. You should see 19 matching records/rows.
-4. In the dropdown menu, select **Reconcile** > **Start Reconciling**.
-5. Click **Add Standard Service** and in the dialogue that appears, enter: http://refine.codefork.com/reconcile/viaf
-6. Since we know we are searching for the names of people, check the bubble next to **People** under **Reconcile each cell to an entity of one of these types**.
-7. Click **Start Reconciling**.
+First, undo any split values on the Author column; then, run a filter on it. We're going to use a regular expression that looks for any values that begin with pipes, end with pipes, or has consecutive pipes:
+
+`(^\|)|(\| \|)|(\|$)`
+
+This should give us 32 values. The first two can be remediated by hand directly from the facet. Instead of editing the remaining ones by hand, we will open a Transform window on our filtered column, and use this GREL:
+
+`value.replace(/^\|/, '').replace('| | |','|').replace('| |','|').replace(/\|$/, '')`
+
+The first value of this Replace command is a RegEx that isolates the pipe character when it appears at the beginning of the string, replacing it with nothing; the two middle replacements looks for multiple pipes separated with white space; the last looks for single pipes at the ends of values.
+
+Once the transformation is run, you should be left with 1,633 records again.
+
+
+</detail>
+
+## Validating Data
+
+***Assessment question: Can the data be validated externally?***
+
+### Reconciliation
+
+Reconciliation allows you to match your data against external data services to reconcile known entities. Remember when we said clustering works only at the syntactic level, and can't perform semantically-aware reconciliation? This function fills in that gap; the only trick is, it requires external data resources to support the service. (Full info on Reconciliation can be found [here](https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation-Service-API).)
+
+#### Exercise: VIAF Reconciliation
+
+Let's try out a Reconciliation example using [Jeff Chiu's](https://github.com/codeforkjeff) VIAF Reconciliation service. (Note: Jeff's original version of this reconciliation service has been superseded by a new version, which can be found [here](https://github.com/codeforkjeff/conciliator). However, since our needs are super low for this example, we can use his deprecated public server at http://refine.codefork.com/. If you plan to play around with his service on your own, use the newer version.)
+
+1. First, let's use our split apart *Author* column. Let's facet on the column: **Facet** > **Text facet**
+2. In the facet, let's **Include** the following five author names: 'Aesop', 'Aristotle', 'Caesar, Julius', 'Chaucer, Geoffrey', and 'Dante Alighieri'. You should see 19 matching records/rows.
+3. In the dropdown menu, select **Reconcile** > **Start Reconciling**.
+4. Click **Add Standard Service** and in the dialogue that appears, enter: http://refine.codefork.com/reconcile/viaf
+5. Since we know we are searching for the names of people, check the bubble next to **People** under **Reconcile each cell to an entity of one of these types**.
+6. Click **Start Reconciling**.
 
 Reconciliation can take a lot of time if you have a lot to look up. However, we only have 5 names to look up, so the service should work quickly.
 
@@ -251,31 +296,17 @@ So we're done, right? **Nope.** All we have right now is the standard VIAF name 
 
 On the Authors column, select **Edit column** > **Add column based on this column...**. In the transformation window, enter your GREL:
 `'https://viaf.org/viaf/' + cell.recon.match.id + '/'`
-This will not only extract the identifier for the entity, but create the full VIAF URI. Name this column **viafID**.
+This will not only extract the identifier for the entity, but create the full VIAF URI. Name this column **viafIDs**.
 
-Once you have this new column, your reconciliation data can be summarily dispatched by selecting **Reconcile** > **Actions** > **Clear reconciliation data**.
+Once you have this new column, reconciliation data can be dispatched by selecting **Reconcile** > **Actions** > **Clear reconciliation data**.
 
-### Other Reconciliation Services
+## Data Enhancement
 
-There are a few services where you can find an OpenRefine Reconciliation option available:
+### Enriching with Web APIs
 
-#### Wikidata
+Depending on what you need or want from your data, it may be pertinent to enrich existing data from an outside source. Open web APIs are great for this, because Refine can send out such web API requests, and parse the results (especially if the response is in JSON, XML, and HTML).
 
-A recon service for Wikidata is now standard in the latest version of OpenRefine, replacing the now-defunct Freebase service. (Google's Knowledge Graph was powered in part by Freebase; Google migrated to Wikidata in 2014.)
-
-The Wikidata reconciler needs a specific Data Type to match with; in many cases, the reconciler will choose the correct data type for you (see below). In other cases, you may need to visit Wikidata to find the specific data type ID.
-
-![refine-9.png](images/refine-9.png)
-
-#### LC-Reconcile
-
-Christina Harlow's [Library of Congress reconciler](https://github.com/cmh2166/lc-reconcile) is also a fab resource worth mentioning!
-
-## Extended OR Power Tools
-
-### Enriching with External Data Sources & APIs
-
-[explanation]
+What if we wanted our Schoenberg data to contain geolocational data for the auction houses that sold some of the manuscripts? That metadata could potentially fuel a discovery layer to see where most of the manuscripts were sold.
 
 1. First, [download this Refine project](https://github.com/DLFMetadataAssessment/DLFMetadataQAWorkshop17/blob/master/OR-Data/Auction-Houses.openrefine.tar.gz?raw=true), which contains some of the addresses of auction houses found in our Schoenberg data.
 2. Open a new browser tab and navigate to http://127.0.0.1:3333/, which will open a new Refine window. Click the lefthand **Import Project** tab and open *Auction-Houses.openrefine.tar.gz*. You should be looking at a previously worked on Refine project with two columns: *Company* and *Address*.
@@ -303,11 +334,7 @@ So, we will select **Add Column** > **Add column based on this column** on *Prim
 
 You should now have a new column of coordinates next to *PrimarySeller*.
 
-### Extensions
-
-OpenRefine has a number of interesting extensions that can be installed to extend the program features. See [the OR download page](http://openrefine.org/download.html) for a list of these extensions; see [this page for download help](https://github.com/OpenRefine/OpenRefine/wiki/Installing-Extensions).
-
-## Getting Your Data Out of OpenRefine
+## Getting Data Out of OpenRefine
 
 When your data has been cleaned to your satisfaction, you can export it to a variety of different file formats. Be sure all text filters and facet windows are closed, and that you have joined any split multi-valued data before you export! Clicking on the **Export** button in the upper right corner of the screen will display the export file formats available. **Export Project**, on the other hand, will save a copy of your Refine project as a TAR archive that can be shared with other people and opened in other Refine installations.
 
@@ -340,7 +367,7 @@ Row template:
       <CurrentLocation>{{escape(cells["CurrentLocation"].value,"xml")}}</CurrentLocation>
       <Author>{{escape(cells["Author"].value,"xml")}}</Author>
       <AuthorVariant>{{escape(cells["AuthorVariant"].value,"xml")}}</AuthorVariant>
-      <viafID>{{escape(cells["VIAF"].value,"xml")}}</viafID>
+      <viafIDs>{{escape(cells["viafIDs"].value,"xml")}}</viafIDs>
       <Title>{{escape(cells["Title"].value,"xml")}}</Title>
       <Language>{{escape(cells["Language"].value,"xml")}}</Language>
       <Material>{{escape(cells["Material"].value,"xml")}}</Material>
@@ -371,15 +398,3 @@ Suffix:
 [blank line break]
 </records>
 ```
-
-Once you have the output file, you can validate its well-formedness to be extra sure your data came out all right. You can do this a bunch of ways; I like using `xmlwf`, a tool that comes with the [`expat` XML parsing package](https://libexpat.github.io/).
-
-To validate, run the command:
-
-```
-xmlwf -v [file name].xml
-```
-
-If all is well, you shouldn't see any error reports:
-
-![refine-10.png](images/refine-10.png)
