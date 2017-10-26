@@ -62,26 +62,28 @@ Next, in our shell, we want to change into our directory where these repository 
 Clone this repository (https://github.com/cul-it/sharedshelf-metadata.git) where you would like to keep it (for example, I keep it in a directory called 'Projects'). Note: this requires **the recursive flag** to get all the materials (if you didn't install Git, just ask the workshop leader for the a thumb-drive with the materials):
 
 ```bash
-$ git clone --recursive https://github.com/dpla/Metadata-Analysis-Workshop.git
-  Cloning into 'Metadata-Analysis-Workshop'...
-  remote: Counting objects: 78, done.
-  remote: Compressing objects: 100% (59/59), done.
-  remote: Total 78 (delta 30), reused 56 (delta 15), pack-reused 0
-  Unpacking objects: 100% (78/78), done.
+$ git clone --recursive https://github.com/DLFMetadataAssessment/DLFMetadataQAWorkshop17.git
+  Cloning into 'DLFMetadataQAWorkshop17'...
+  remote: Counting objects: 339, done.
+  remote: Compressing objects: 100% (35/35), done.
+  remote: Total 339 (delta 22), reused 35 (delta 12), pack-reused 292
+  Receiving objects: 100% (339/339), 14.77 MiB | 803.00 KiB/s, done.
+  Resolving deltas: 100% (175/175), done.
+$ git submodule init
   Submodule 'metadataQA' (https://github.com/cmh2166/metadataQA) registered for path 'metadataQA'
-  Cloning into '/Users/Christina/Metadata-Analysis-Workshop/metadataQA'...
-  Submodule path 'metadataQA': checked out '0e44b393bc11e00d8a3e24959be45e3f229e90c4'
+$ git submodule update
+  Cloning into '/Users/sul.cmharlow/Code/src/github.org/DLFMetadataAssessment/DLFMetadataQAWorkshop17/metadataQA'...
+  Submodule path 'metadataQA': checked out '1c680d94241082abf79fc28898e5252f1441b313'
 ```
 
 With the workshop materials repository on your local machine (you'll need to remember where you downloaded or cloned this directory), let's change into that directory and make sure we are in the right spot using the `cd`, `pwd`, and `ls` commands we just learned:
 
 ```bash
-$ cd Metadata-Analysis-Workshop/
+$ cd DLFMetadataQAWorkshop17/
 $ pwd
-  /Users/Christina/Metadata-Analysis-Workshop
+  /Users/Christina/DLFMetadataQAWorkshop17/
 $ ls .
-  Bash.md			Metadata_Harvest.md	harvested-metadata	metadata-python
-  Metadata_Breakers.md	README.md		images			metadataQA
+  Bash.md              Bash_Exercises.md    Metadata_Breakers.md Metadata_Harvest.md  OR-Data              OpenRefine.md        README.md            harvested-metadata   images               metadataQA           slides
 ```
 
 Python virtual environments enable you to isolate the Python options (version used, libraries used, version of libraries used) to a particular working area or project. This is helpful if you don't want to change any global settings on your computer - which often, you don't.
